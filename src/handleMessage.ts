@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { IUser } from "../types"
+import deleteMessage from "./methods/deleteMessage"
 import generateReplyMarkup from "./methods/generateReplyMarkup"
 import sendMessage from "./methods/sendMessage"
 import translate from "./methods/translate"
@@ -29,7 +30,12 @@ export default async function handleMessage(req: Request, res: Response) {
       lang1: user.input_language,
       lang2: user.target_language,
     })
-    sendMessage(userId, "Done\\!", markup)
+
+    await deleteMessage(
+      req.body.callback_query.message.message_id,
+      req.body.callback_query.message.chat.id
+    )
+    await sendMessage(userId, "*Done\\!*", markup)
   } else if (req.body.message) {
     // if user send text to translate or click on button under input area to swap or change languages
     let messageText: string = req.body.message.text
@@ -61,7 +67,7 @@ export default async function handleMessage(req: Request, res: Response) {
           lang1: user.input_language,
           lang2: user.target_language,
         })
-        await sendMessage(userId, "Done\\!", markup)
+        await sendMessage(userId, "*Done\\!*", markup)
       } else {
         // else user wants to select new language
         // determine which language to change
@@ -75,7 +81,7 @@ export default async function handleMessage(req: Request, res: Response) {
           },
           type
         )
-        await sendMessage(userId, "Select language:", markup)
+        await sendMessage(userId, "*Select language:*", markup)
       }
     } else {
       // finally, none of the above tests passed - just translate text from user
