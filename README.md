@@ -7,8 +7,8 @@ You can check it out here: t.me/reverso_context_bot
 
 ## TODO's
 
-- [x] Changin languages
-- [] Voice recognition and Pronuncioation
-- [] Images
-- [] Definitions
-- [] Examples
+- [x] Changing languages
+- [ ] Voice recognition and Pronuncioation
+- [ ] Images
+- [ ] Definitions
+- [ ] Examples
