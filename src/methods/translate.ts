@@ -9,7 +9,7 @@ export default async function translate(
     .post(
       "https://api.reverso.net/translate/v1/translation",
       {
-        input: text.replace(/.|!|-|(|)|,/, '\\$match'),
+        input: text,
         from: from,
         to: to,
         format: "text",
