@@ -90,7 +90,7 @@ export default async function handleMessage(req: Request, res: Response) {
         lang2: user.target_language,
       })
       let translated = await translate(
-        messageText.replace(/_|\*|\[|\]|\(|\)|~|`|>|#|\+|-|=| {|}|\.|!/g, '\\$1'),
+        messageText.replace(/_|\*|\[|\]|\(|\)|~|`|>|#|\+|-|=| {|}|\.|!/g, '\\$&'),
         user.input_language,
         user.target_language
       )
